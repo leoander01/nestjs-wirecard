@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm'
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 import 'dotenv/config'
 
 export const dataSource = new DataSource({
@@ -8,6 +9,9 @@ export const dataSource = new DataSource({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: ['src/modules/**/*.entity{.ts,.js}'],
+  namingStrategy: new SnakeNamingStrategy(),
+  entities: [
+    'src/modules/**/*.entity{.ts,.js}',
+  ],
   migrations: ['src/migrations/*{.ts,.js}', 'dist/migrations/*{.ts,.js}'],
 })
